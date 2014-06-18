@@ -26,7 +26,7 @@ def decrypt(_string,_width):
         height = 0
         while height < sizeH:        
             stringpos = width*sizeH+height+i
-            if width*_width+height < len(_string):
+            if height*sizeW+width< len(_string):
                 array2d[height][width] = _string[stringpos]
             else:
                 i -= 1
@@ -52,8 +52,7 @@ def stringToCrypt( _string, _width):
     return stringMatrixToCrypt(stringToMatrix(_string,_width))
     
 if __name__ == "__main__":
-    #_input = "thank you for applying for a job at play studios"
-    _input = "thank you for applying for a job at play studios Thank you for applying for a job at play studios thank you for applying for a job at play studios Thank you for applying for a job at play studios"
+    _input = "thank you for applying for a job at play studios"
     crypt = stringToCrypt(_input,6)
     decrypt =  stringToDecrypt(crypt,6)
     print "Source : {0} \nCrypt  : {1}\nDecrypt: {2}".format(_input,crypt,decrypt)
