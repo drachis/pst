@@ -16,22 +16,22 @@ def stringToMatrix(_string,_width):
 def decrypt(_string,_width):
     # rotate data back from crypt
     height = int(math.ceil(len(_string)/float(_width)))
-    sizeV = height
-    sizeH = _width
+    sizeH = height
+    sizeW = _width
     array2d = [["" for x in xrange(_width)] for y in xrange(height)]
     decrypt = ""
-    h = 0
+    width = 0
     i = 0
-    while h < sizeH:
-        v = 0
-        while v < sizeV:        
-            stringpos = _width*h+v+h+i
-            if v*_width+h < len(_string):
-                array2d[v][h] = _string[stringpos]
+    while width < sizeW:
+        height = 0
+        while height < sizeH:        
+            stringpos = width*sizeH+height+i
+            if width*_width+height < len(_string):
+                array2d[height][width] = _string[stringpos]
             else:
                 i -= 1
-            v  += 1
-        h += 1
+            height  += 1
+        width += 1
     return array2dToString(array2d)
 
 def array2dToString(_list):
@@ -52,7 +52,8 @@ def stringToCrypt( _string, _width):
     return stringMatrixToCrypt(stringToMatrix(_string,_width))
     
 if __name__ == "__main__":
-    _input = "thank you for applying for a job at play studios"
+    #_input = "thank you for applying for a job at play studios"
+    _input = "thank you for applying for a job at play studios Thank you for applying for a job at play studios thank you for applying for a job at play studios Thank you for applying for a job at play studios"
     crypt = stringToCrypt(_input,6)
     decrypt =  stringToDecrypt(crypt,6)
     print "Source : {0} \nCrypt  : {1}\nDecrypt: {2}".format(_input,crypt,decrypt)
