@@ -3,7 +3,7 @@ import math
 
 def findDuplicates(array2d):
     _dict = {}
-    bestDup = []
+    bestDup = [-1,-1]
     closest = len(array2d)**2
     for i,x, in enumerate(array2d):
         for j,y in enumerate(x):
@@ -29,6 +29,6 @@ def distance(a,b):
     return math.sqrt(istanceSimple(a,b))    
 
 if __name__ == "__main__":
-    dummyData = [[ random.randint(0,258) for x in range(8)] for y in range(8)]
+    dummyData = [[ random.randint(0,256) for x in range(4)] for y in range(4)]
     dup = findDuplicates(dummyData)
     print "Closest duplicate value is at: {0},{1}".format(dup[0], dup[1])
