@@ -18,21 +18,23 @@ def stringToMatrix(_string = None, _width = None):
 def stringMatrixToCryptString(_list):
     sizeRows = len(_list)
     sizeColumns = len(_list[0])
-    #special case since this row can end early
-    lasColumn = len(_list[-1])
+    lastColumn = len(_list[-1])
     stringCrypt = ""
     col = 0
     row = 0
     while col < sizeColumns:
         while row < sizeRows:
-            if row != sizeRows and col < lasColumn:
-                stringCrypt+=_list[row][col]
+            if row != sizeRows-1:
+                stringCrypt += _list[row][col]
+            elif col < lastColumn:
+                stringCrypt += _list[row][col]
+                
             row += 1
         col += 1
         row = 0
     return stringCrypt
 
 if __name__ == "__main__":
-    _input = "A A    A    B  B  B C C C "
-    print stringMatrixToCryptString(stringToMatrix(_input,3))
+    _input = "thank you for applying for a job at play studios"
+    print stringMatrixToCryptString(stringToMatrix(_input,6))
         
