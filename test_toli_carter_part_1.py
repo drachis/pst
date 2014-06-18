@@ -14,29 +14,39 @@ def stringToMatrix(_string,_width):
     return output
 
 def decrypt(_string,sizeH):
-    sizeV = math.ceil(len(string)/float(_width))
-    v,h= 0    
+    sizeV = int(math.ceil(len(_string)/float(sizeH)))
+    v = 0
+    h = 0
+    array2d = [["" for s in xrange(sizeH)] for a in xrange(sizeV)]
+    decrypt = ""
+    stringPos = 0 
     while v < sizeV:
-        pass    
-    return decrypt
-                      
+        while h < sizeH:
+            array2d[v][h] = _string[stringPos]
+            stringPos += 1
+            h += 1
+        v += 1
+        
+    return array2dToString(array2d)
+
+def array2dToString(_list):
+    _string = ""
+    for line in _list:
+        _string += "".join(line).strip()
+    return _string
 
 def stringMatrixToCrypt(_list):
-    crypt = ""
-    for line in zip(*_list[::-1]):
-        crypt += "".join(line).strip()
+    crypt = array2dToString(zip(*_list[::-1]))
     return crypt
 
 def stringMatrixToDecrypt(_list):
-    decrypt = ""
-    for line in zip(*_list)[::-1]:
-        decrypt += "".join(line).strip()
+    decrypt = array2dToString(zip(*_list)[::-1])
     return decrypt
     
 
 def stringToDecrypt(_string, _width):
     _width = int(math.ceil(len(_string)/float(_width)))
-    return stringMatrixToDecrypt(stringToMatrix(_string, _width))
+    return decrypt(stringToMatrix(_string, _width),_width)
 
 def stringToCrypt( _string, _width):
     _string = _string.replace(" ","")
