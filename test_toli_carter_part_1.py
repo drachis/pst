@@ -36,5 +36,6 @@ def stringMatrixToCryptString(_list):
 
 if __name__ == "__main__":
     _input = "thank you for applying for a job at play studios"
-    print stringMatrixToCryptString(stringToMatrix(_input,6))
+    print zip(*stringToMatrix(_input,6))[0]
+    pass
         
