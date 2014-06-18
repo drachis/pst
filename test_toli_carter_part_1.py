@@ -1,7 +1,7 @@
 import math 
 
 def stringToMatrix(_string,_width):
-    #break string into a filled matrix
+    # break string into a matrix, empty space is filled with spaces
     start = 0
     length = len(_string)
     output = []
@@ -14,13 +14,11 @@ def stringToMatrix(_string,_width):
     return output
 
 def decrypt(_string,_width):
+    # rotate data back from crypt
     height = int(math.ceil(len(_string)/float(_width)))
-    
     sizeV = height
     sizeH = _width
-    
-   
-    array2d = [["" for s in xrange(_width)] for a in xrange(height)]
+    array2d = [["" for x in xrange(_width)] for y in xrange(height)]
     decrypt = ""
     h = 0
     i = 0
@@ -53,13 +51,11 @@ def stringToCrypt( _string, _width):
     _string = _string.replace(" ","")
     return stringMatrixToCrypt(stringToMatrix(_string,_width))
     
-    
 if __name__ == "__main__":
     _input = "thank you for applying for a job at play studios"
-    #_input = "1234567890"
     crypt = stringToCrypt(_input,6)
-    uncrypt =  stringToDecrypt(crypt,6)
-    pass
+    decrypt =  stringToDecrypt(crypt,6)
+    print "Source : {0} \nCrypt  : {1}\nDecrypt: {2}".format(_input,crypt,decrypt)
 
         
         
