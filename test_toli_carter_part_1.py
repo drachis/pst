@@ -13,20 +13,27 @@ def stringToMatrix(_string,_width):
         start += _width
     return output
 
-def decrypt(_string,sizeH):
-    sizeV = int(math.ceil(len(_string)/float(sizeH)))
-    v = 0
-    h = 0
-    array2d = [["" for s in xrange(sizeH)] for a in xrange(sizeV)]
+def decrypt(_string,_width):
+    height = int(math.ceil(len(_string)/float(_width)))
+    
+    sizeV = height
+    sizeH = _width
+    
+   
+    array2d = [["" for s in xrange(_width)] for a in xrange(height)]
     decrypt = ""
-    stringPos = 0 
-    while v < sizeV:
-        while h < sizeH:
-            array2d[v][h] = _string[stringPos]
-            stringPos += 1
-            h += 1
-        v += 1
-        
+    h = 0
+    i = 0
+    while h < sizeH:
+        v = 0
+        while v < sizeV:        
+            stringpos = _width*h+v+h+i
+            if v*_width+h < len(_string):
+                array2d[v][h] = _string[stringpos]
+            else:
+                i -= 1
+            v  += 1
+        h += 1
     return array2dToString(array2d)
 
 def array2dToString(_list):
@@ -36,17 +43,11 @@ def array2dToString(_list):
     return _string
 
 def stringMatrixToCrypt(_list):
-    crypt = array2dToString(zip(*_list[::-1]))
+    crypt = array2dToString(zip(*_list))
     return crypt
-
-def stringMatrixToDecrypt(_list):
-    decrypt = array2dToString(zip(*_list)[::-1])
-    return decrypt
     
-
-def stringToDecrypt(_string, _width):
-    _width = int(math.ceil(len(_string)/float(_width)))
-    return decrypt(stringToMatrix(_string, _width),_width)
+def stringToDecrypt(_string, _width):    
+    return decrypt(_string,_width)
 
 def stringToCrypt( _string, _width):
     _string = _string.replace(" ","")
@@ -54,8 +55,8 @@ def stringToCrypt( _string, _width):
     
     
 if __name__ == "__main__":
-    #_input = "thank you for applying for a job at play studios"
-    _input = "1234567890"
+    _input = "thank you for applying for a job at play studios"
+    #_input = "1234567890"
     crypt = stringToCrypt(_input,6)
     uncrypt =  stringToDecrypt(crypt,6)
     pass
