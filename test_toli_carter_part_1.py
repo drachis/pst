@@ -26,7 +26,7 @@ def decrypt(_string,_width):
         height = 0
         while height < sizeH:        
             stringpos = width*sizeH+height+i
-            if height*sizeW+width< len(_string):
+            if height*sizeW+width < len(_string):
                 array2d[height][width] = _string[stringpos]
             else:
                 i -= 1
