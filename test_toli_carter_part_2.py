@@ -20,7 +20,7 @@ def findDuplicates(array2d):
                     bestDup = pair
     return bestDup
 def distanceSimple(a,b):
-    #distance with out a square root for daster comparisons
+    #distance with out a square root for faster comparisons
     x = a[0]-b[0]
     y = a[1]-b[1]
     return x+y
