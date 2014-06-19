@@ -25,10 +25,23 @@ def distanceSimple(a,b):
     y = a[1]-b[1]
     return x+y
 
+def circularWalk(size):
+    #generate walking coordinates for points closer to 0,0 sooner
+    x = 0
+    y = 0
+    while n < size:
+        while x <= n:        
+            yield (x,n)
+            x += 1
+        while y < n:
+            yield (n,y)
+            y += 1
 def distance(a,b):
     return math.sqrt(istanceSimple(a,b))    
 
 if __name__ == "__main__":
-    dummyData = [[ random.randint(0,256) for x in range(4)] for y in range(4)]
-    dup = findDuplicates(dummyData)
-    print "Closest duplicate value is at: {0},{1}".format(dup[0], dup[1])
+    for val in circularWalk(5):
+        print val
+    #dummyData = [[ random.randint(0,256) for x in range(4)] for y in range(4)]
+    #dup = findDuplicates(dummyData)
+    #print "Closest duplicate value is at: {0},{1}".format(dup[0], dup[1])
