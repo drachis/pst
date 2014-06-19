@@ -1,5 +1,6 @@
 import random
-
+from PIL import Image
+import os
 def findDuplicates(array2d,size):
     _dict = {}
     closest = (size+1,size+1)
@@ -48,9 +49,25 @@ def rectangularWalk(size):
             y += 1
         n += 1
         x,y = (0,0)
+        
+def findDuplicate(data,size):
+    dup = findDuplicates(data,size)
+    print "Closest duplicate value is at: ({0},{1})".format(dup[0], dup[1])    
 
 if __name__ == "__main__":
+    
+    # dummy data
     size = 128
     dummyData = [[ random.randint(0,256) for x in xrange(size)] for y in xrange(size)]
-    dup = findDuplicates(dummyData,size)
-    print "Closest duplicate value is at: ({0},{1})".format(dup[0], dup[1])
+    print "in dummy data --"
+    findDuplicate(dummyData,size)
+    # image data, will break on non square images
+    noisePath = os.path.join(os.path.dirname(os.path.realpath(__file__)),"noise.bmp")
+    image = Image.open(noisePath)
+    width, height = image.size
+    pixels = image.load()
+    pixels = [[pixels[x,y] for x in xrange(width)] for y in xrange(height)]
+    print "in image data --"
+    findDuplicate(pixels,height)
+    pass
+    
