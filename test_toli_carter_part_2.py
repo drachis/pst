@@ -1,5 +1,4 @@
 import random
-import math
 
 def findDuplicates(array2d,size):
     _dict = {}
@@ -20,7 +19,7 @@ def findDuplicates(array2d,size):
             else:
                 closest = coord
         elif coord[0] > closest[0]*1.5 or coord[1] > closest[1]*1.5:            
-            #once beyond the radius of the circle on the axis stop looking.
+            # once beyond the radius of the circle on the axis stop looking.
             break
     if foundDup:
         return closest
@@ -28,7 +27,7 @@ def findDuplicates(array2d,size):
         return (-1,-1)
 
 def distanceSimple(a,b):
-    #distance with out a square root, faster for comparison work
+    # distance with out a square root, faster for comparison work
     x = a[0]-b[0]
     y = a[1]-b[1]
     return x**2+y**2
@@ -36,9 +35,9 @@ def distanceSimple(a,b):
 def distance(a,b):
     return math.sqrt(istanceSimple(a,b))    
 
-def rectangularWalk(size):
-    #assumes data is square and uses an edge length in data points
-    #generate walking coordinates for points closer to 0,0 sooner
+def rectangularWalk(size):        
+    # generate walking coordinates for points closer to 0,0 sooner
+    # assumes data is square and uses an edge length for max
     x,y,n = (0,0,0)
     while n < size:
         while x <= n:        
@@ -51,7 +50,8 @@ def rectangularWalk(size):
         x,y = (0,0)
 
 if __name__ == "__main__":
-    size = 32
-    dummyData = [[ random.randint(0,1024) for x in xrange(size)] for y in xrange(size)]
+    size = 128
+    dummyData = [[ random.randint(0,256) for x in xrange(size)] for y in xrange(size)]
     dup = findDuplicates(dummyData,size)
     print "Closest duplicate value is at: ({0},{1})".format(dup[0], dup[1])
+    pass
