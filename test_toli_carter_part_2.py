@@ -54,4 +54,3 @@ if __name__ == "__main__":
     dummyData = [[ random.randint(0,256) for x in xrange(size)] for y in xrange(size)]
     dup = findDuplicates(dummyData,size)
     print "Closest duplicate value is at: ({0},{1})".format(dup[0], dup[1])
-    pass
