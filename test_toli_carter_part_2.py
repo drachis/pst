@@ -27,8 +27,7 @@ def distanceSimple(a,b):
 
 def circularWalk(size):
     #generate walking coordinates for points closer to 0,0 sooner
-    x = 0
-    y = 0
+    x,y,n = (0,0,0)
     while n < size:
         while x <= n:        
             yield (x,n)
@@ -36,6 +35,9 @@ def circularWalk(size):
         while y < n:
             yield (n,y)
             y += 1
+        n += 1
+        x,y = (0,0)
+        
 def distance(a,b):
     return math.sqrt(istanceSimple(a,b))    
 
