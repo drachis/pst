@@ -1,31 +1,43 @@
 import random
 import math
 
-def findDuplicates(array2d):
+def findDuplicates(array2d,size):
     _dict = {}
-    bestDup = [-1,-1]
-    closest = len(array2d)**2
-    for i,x, in enumerate(array2d):
-        for j,y in enumerate(x):
-            if y not in _dict:
-                _dict[y] = [(i,j)]
+    closest = (size+1,size+1)
+    foundDup = False
+    for coord in rectangularWalk(size):
+        if foundDup == False:
+            value = array2d[coord[0]][coord[1]]
+            if value not in _dict:
+                _dict[value] = [coord]
             else:
-                _dict[y].append((i,j))
-    for value in _dict:
-        if len(_dict[value]) > 1:
-            for pair in _dict[value]:
-                _distance = distanceSimple(pair, (0,0))
-                if _distance < closest:
-                    closest  = _distance
-                    bestDup = pair
-    return bestDup
+                foundDup = True
+                closest = coord
+        elif distanceSimple((0,0), coord) < distanceSimple((0,0), closest):
+            # duplicates beyond the radius of the initial point are of no intrest
+            if value not in _dict:
+                _dict[value] = [coord]
+            else:
+                closest = coord
+        elif coord[0] > closest[0]*1.5 or coord[1] > closest[1]*1.5:            
+            #once beyond the radius of the circle on the axis stop looking.
+            break
+    if foundDup:
+        return closest
+    else:
+        return (-1,-1)
+
 def distanceSimple(a,b):
-    #distance with out a square root for faster comparisons
+    #distance with out a square root, faster for comparison work
     x = a[0]-b[0]
     y = a[1]-b[1]
-    return x+y
+    return x**2+y**2
 
-def circularWalk(size):
+def distance(a,b):
+    return math.sqrt(istanceSimple(a,b))    
+
+def rectangularWalk(size):
+    #assumes data is square and uses an edge length in data points
     #generate walking coordinates for points closer to 0,0 sooner
     x,y,n = (0,0,0)
     while n < size:
@@ -37,13 +49,9 @@ def circularWalk(size):
             y += 1
         n += 1
         x,y = (0,0)
-        
-def distance(a,b):
-    return math.sqrt(istanceSimple(a,b))    
 
 if __name__ == "__main__":
-    for val in circularWalk(5):
-        print val
-    #dummyData = [[ random.randint(0,256) for x in range(4)] for y in range(4)]
-    #dup = findDuplicates(dummyData)
-    #print "Closest duplicate value is at: {0},{1}".format(dup[0], dup[1])
+    size = 32
+    dummyData = [[ random.randint(0,1024) for x in xrange(size)] for y in xrange(size)]
+    dup = findDuplicates(dummyData,size)
+    print "Closest duplicate value is at: ({0},{1})".format(dup[0], dup[1])
